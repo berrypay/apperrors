@@ -1,2 +1,2 @@
 # apperrors
-Canonicalised application errors struct for enterprise software development
+Canonicalised application errors for enterprise software development

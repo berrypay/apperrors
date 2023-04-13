@@ -5,7 +5,7 @@
  * Author: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * Company: BerryPay (M) Sdn. Bhd.
  * --------------------------------------
- * Last Modified: Thursday April 13th 2023 15:40:40 +0800
+ * Last Modified: Thursday April 13th 2023 16:07:15 +0800
  * Modified By: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * --------------------------------------
  * Copyright (c) 2023 BerryPay (M) Sdn. Bhd.
@@ -30,4 +30,36 @@ type RepositoryError struct {
 
 func (e RepositoryError) Error() string {
 	return fmt.Sprintf("[%s] %s", e.ErrorCode, e.Message)
+}
+
+func NewRepositoryFailedConnectionError(message string, err error) RepositoryError {
+	return RepositoryError{
+		ErrorCode:   ERR_REPOSITORY_FAILED_CONNECTION,
+		Message:     message,
+		SourceError: err,
+	}
+}
+
+func NewRepositoryFailedQueryError(message string, err error) RepositoryError {
+	return RepositoryError{
+		ErrorCode:   ERR_REPOSITORY_FAILED_QUERY,
+		Message:     message,
+		SourceError: err,
+	}
+}
+
+func NewRepositoryFailedUpdateError(message string, err error) RepositoryError {
+	return RepositoryError{
+		ErrorCode:   ERR_REPOSITORY_FAILED_UPDATE,
+		Message:     message,
+		SourceError: err,
+	}
+}
+
+func NewRepositoryFailedDeleteError(message string, err error) RepositoryError {
+	return RepositoryError{
+		ErrorCode:   ERR_REPOSITORY_FAILED_DELETE,
+		Message:     message,
+		SourceError: err,
+	}
 }
