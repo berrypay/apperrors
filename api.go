@@ -5,7 +5,7 @@
  * Author: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * Company: BerryPay (M) Sdn. Bhd.
  * --------------------------------------
- * Last Modified: Thursday April 13th 2023 15:46:22 +0800
+ * Last Modified: Thursday April 13th 2023 15:58:11 +0800
  * Modified By: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * --------------------------------------
  * Copyright (c) 2023 BerryPay (M) Sdn. Bhd.
@@ -22,47 +22,47 @@ const (
 )
 
 type APICallError struct {
-	ErrorCode      string `json:"errorCode"`
-	Message        string `json:"message"`
-	StatusCode     int    `json:"statusCode"`
-	ResponseCode   string `json:"responseCode"`
-	ResponseDetail string `json:"responseDetail"`
-	SourceError    error  `json:"sourceError"`
+	ErrorCode    string `json:"errorCode"`
+	Message      string `json:"message"`
+	StatusCode   int    `json:"statusCode"`
+	ResponseCode string `json:"responseCode"`
+	ResponseBody string `json:"responseBody"`
+	SourceError  error  `json:"sourceError"`
 }
 
 func (e APICallError) Error() string {
-	return fmt.Sprintf("[%s] %s - StatusCode{%d} ResponseCode{%s} ResponseDetail{%s}", e.ErrorCode, e.Message, e.StatusCode, e.ResponseCode, e.ResponseDetail)
+	return fmt.Sprintf("[%s] %s - StatusCode{%d} ResponseCode{%s} ResponseBody{%s}", e.ErrorCode, e.Message, e.StatusCode, e.ResponseCode, e.ResponseBody)
 }
 
-func NewAPICallFailedError(message string, statusCode int, responseCode string, responseDetail string, err error) APICallError {
+func NewAPICallFailedError(message string, statusCode int, responseCode string, responseBody string, err error) APICallError {
 	return APICallError{
-		ErrorCode:      ERR_API_CALL_FAILURE,
-		Message:        message,
-		StatusCode:     statusCode,
-		ResponseCode:   responseCode,
-		ResponseDetail: responseDetail,
-		SourceError:    err,
+		ErrorCode:    ERR_API_CALL_FAILURE,
+		Message:      message,
+		StatusCode:   statusCode,
+		ResponseCode: responseCode,
+		ResponseBody: responseBody,
+		SourceError:  err,
 	}
 }
 
-func NewAPICallFailedPayloadMissingError(message string, statusCode int, responseCode string, responseDetail string, err error) APICallError {
+func NewAPICallFailedPayloadMissingError(message string, statusCode int, responseCode string, responseBody string, err error) APICallError {
 	return APICallError{
-		ErrorCode:      ERR_API_FAILURE_PAYLOAD_MISSING,
-		Message:        message,
-		StatusCode:     statusCode,
-		ResponseCode:   responseCode,
-		ResponseDetail: responseDetail,
-		SourceError:    err,
+		ErrorCode:    ERR_API_FAILURE_PAYLOAD_MISSING,
+		Message:      message,
+		StatusCode:   statusCode,
+		ResponseCode: responseCode,
+		ResponseBody: responseBody,
+		SourceError:  err,
 	}
 }
 
-func NewAPICallFailedSignatureMismatchError(message string, statusCode int, responseCode string, responseDetail string, err error) APICallError {
+func NewAPICallFailedSignatureMismatchError(message string, statusCode int, responseCode string, responseBody string, err error) APICallError {
 	return APICallError{
-		ErrorCode:      ERR_API_FAILURE_SIGNATURE_MISMATCH,
-		Message:        message,
-		StatusCode:     statusCode,
-		ResponseCode:   responseCode,
-		ResponseDetail: responseDetail,
-		SourceError:    err,
+		ErrorCode:    ERR_API_FAILURE_SIGNATURE_MISMATCH,
+		Message:      message,
+		StatusCode:   statusCode,
+		ResponseCode: responseCode,
+		ResponseBody: responseBody,
+		SourceError:  err,
 	}
 }
