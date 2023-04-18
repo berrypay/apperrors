@@ -5,7 +5,7 @@
  * Author: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * Company: BerryPay (M) Sdn. Bhd.
  * --------------------------------------
- * Last Modified: Thursday April 13th 2023 15:45:23 +0800
+ * Last Modified: Tuesday April 18th 2023 16:30:01 +0800
  * Modified By: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * --------------------------------------
  * Copyright (c) 2023 BerryPay (M) Sdn. Bhd.
@@ -26,20 +26,20 @@ type PayloadError struct {
 	SourceError error  `json:"sourceError"`
 }
 
-func (e PayloadError) Error() string {
+func (e *PayloadError) Error() string {
 	return fmt.Sprintf("[%s] %s", e.ErrorCode, e.Message)
 }
 
-func NewPayloadMissingError(message string, err error) PayloadError {
-	return PayloadError{
+func NewPayloadMissingError(message string, err error) *PayloadError {
+	return &PayloadError{
 		ErrorCode:   ERR_PAYLOAD_MISSING,
 		Message:     message,
 		SourceError: err,
 	}
 }
 
-func NewPayloadInvalidError(message string, err error) PayloadError {
-	return PayloadError{
+func NewPayloadInvalidError(message string, err error) *PayloadError {
+	return &PayloadError{
 		ErrorCode:   ERR_PAYLOAD_INVALID,
 		Message:     message,
 		SourceError: err,
